@@ -1,0 +1,73 @@
+#!/bin/bash
+
+installer = ''
+
+if [ "$(uname)" == 'Darwin' ]; then
+	installer = 'brew'
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+	installer = 'sudo apt-get'
+else
+	echo 'Unsupported OS'
+	exit 1
+fi
+
+echo ''
+echo '-------------------------'
+echo 'Installing Dependencies'
+$installer install git
+$installer install curl
+$installer install ripgrep
+$installer install gnupg
+echo ''
+echo ''
+echo '-------------------------'
+echo 'Installing asdf'
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+echo ''
+echo ''
+echo '-------------------------'
+echo 'Installing nvim'
+$installer install neovim
+cp ./init.vim ~/.config/nvim/init.vim
+echo ''
+echo ''
+echo '-------------------------'
+echo 'Installing ZSH'
+$installer install zsh
+echo 'zsh version: ' $(zsh --version)
+echo ''
+echo ''
+echo '-------------------------'
+echo 'Installing Oh My Zsh'
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+cp ./zshrc-example ~/.zshrc
+source ~/.zshrc
+echo ''
+echo ''
+echo '-------------------------'
+echo 'Installing Nodejs'
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf reshim nodejs
+asdf global nodejs
+echo 'nodejs version: ' $(node -v)
+echo 'npm version: ' $(npm -v)
+echo ''
+echo ''
+echo '-------------------------'
+echo 'Installing Powerline Fonts'
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts/
+./install.sh
+cd ../
+rm -rf fonts/
+echo ''
+echo ''
+echo '-------------------------'
+echo 'Set the font in your terminal to a Powerline font (Fira code recommended) '
+source ~/.zshrc
+echo ''
+echo 'Done!'
+echo 'Please, restart you terminal.'
