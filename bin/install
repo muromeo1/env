@@ -1,23 +1,23 @@
 #!/bin/bash
 
-installer = ''
-
-if [ "$(uname)" == 'Darwin' ]; then
-	installer = 'brew'
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-	installer = 'sudo apt-get'
-else
-	echo 'Unsupported OS'
-	exit 1
-fi
+install_app() {
+	if [ "$(uname)" == 'Darwin' ]; then
+		brew install $1
+	elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+		sudo apt-get install $1
+	else
+		echo 'Unsupported OS'
+		exit 1
+	fi
+}
 
 echo ''
 echo '-------------------------'
 echo 'Installing Dependencies'
-$installer install git
-$installer install curl
-$installer install ripgrep
-$installer install gnupg
+install_app 'git'
+install_app 'curl'
+install_app 'ripgrep'
+install_app 'gnupg'
 echo ''
 echo ''
 echo '-------------------------'
@@ -27,13 +27,13 @@ echo ''
 echo ''
 echo '-------------------------'
 echo 'Installing nvim'
-$installer install neovim
+install_app 'neovim'
 cp ./init.vim ~/.config/nvim/init.vim
 echo ''
 echo ''
 echo '-------------------------'
 echo 'Installing ZSH'
-$installer install zsh
+install_app 'zsh'
 echo 'zsh version: ' $(zsh --version)
 echo ''
 echo ''
