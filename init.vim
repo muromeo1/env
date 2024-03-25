@@ -6,6 +6,7 @@ set ignorecase
 set incsearch
 set encoding=UTF-8
 set colorcolumn=120
+set termguicolors
 
 call plug#begin()
 
@@ -67,15 +68,6 @@ command! -bang -nargs=* RG
 	\ <q-args>,
 	\ fzf#vim#with_preview(),
 	\ <bang>0)
-
-if (empty($TMUX))
-	if (has("nvim"))
-		let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-	endif
-	if (has("termguicolors"))
-		set termguicolors
-	endif
-endif
 
 nnoremap <C-p> :FZF <CR>
 nnoremap <C-h> :bp <CR>
