@@ -11,63 +11,74 @@ install_app() {
 	fi
 }
 
-echo ''
-echo '-------------------------'
-echo 'Installing Dependencies'
-install_app 'git'
-install_app 'curl'
-install_app 'ripgrep'
-install_app 'gnupg'
-echo ''
-echo ''
-echo '-------------------------'
-echo 'Installing asdf'
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-echo ''
-echo ''
-echo '-------------------------'
-echo 'Installing nvim'
-install_app 'neovim'
-cp ./init.vim ~/.config/nvim/init.vim
-echo ''
-echo ''
-echo '-------------------------'
-echo 'Installing ZSH'
-install_app 'zsh'
-echo 'zsh version: ' $(zsh --version)
-echo ''
-echo ''
-echo '-------------------------'
-echo 'Installing Oh My Zsh'
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-cp ./zshrc-example ~/.zshrc
-source ~/.zshrc
-echo ''
-echo ''
-echo '-------------------------'
-echo 'Installing Nodejs'
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs latest
-asdf reshim nodejs
-asdf global nodejs
-echo 'nodejs version: ' $(node -v)
-echo 'npm version: ' $(npm -v)
-echo ''
-echo ''
-echo '-------------------------'
-echo 'Installing Powerline Fonts'
-git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts/
-./install.sh
-cd ../
-rm -rf fonts/
-echo ''
-echo ''
-echo '-------------------------'
-echo 'Set the font in your terminal to a Powerline font (Fira code recommended) '
-source ~/.zshrc
-echo ''
-echo 'Done!'
-echo 'Please, restart you terminal.'
+install_dependencies() {
+	echo 'Installing Dependencies'
+	echo
+	install_app 'git'
+	install_app 'curl'
+	install_app 'ripgrep'
+	install_app 'gnupg'
+}
+
+install_asdf() {
+	echo 'Installing asdf'
+	echo
+	rm -rf ~/.asdf
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+	echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc
+	source ~/.bashrc
+}
+
+install_nvim() {
+	echo 'Installing neovim'
+	echo
+	install_app 'neovim'
+	cp ./init.vim ~/.config/nvim/init.vim
+}
+
+install_zsh() {
+	echo 'Installing ZSH'
+	echo
+	install_app 'zsh'
+}
+
+install_oh_my_zsh() {
+	echo 'Installing Oh My Zsh'
+	echo
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	cp ./zshrc ~/.zshrc
+}
+
+install_nodejs() {
+	echo 'Installing Nodejs'
+	echo
+	asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+	asdf install nodejs latest
+	asdf reshim nodejs
+	asdf global nodejs
+}
+
+install_powerline_fonts() {
+	echo 'Installing Powerline Fonts'
+	echo
+	git clone https://github.com/powerline/fonts.git --depth=1
+	cd fonts/
+	./install.sh
+	cd ../
+	rm -rf fonts/
+	echo 'Set the font in your terminal to a Powerline font (Fira code recommended) '
+}
+
+main() {
+	install_dependencies
+	install_asdf
+	install_nvim
+	install_zsh
+	install_oh_my_zsh
+	install_nodejs
+	install_powerline_fonts
+}
+
+main
