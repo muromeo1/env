@@ -4,9 +4,9 @@ It automatic installs my local environment and everything that needs to develop 
 
 ## Getting started
 1. Run `bin/install`
-2. Restart terminal
-3. Powerline Fonts are already installed so just select your preferred one (JetBrains or FiraCode)
-
+2. Powerline Fonts are already installed so just select your preferred one (JetBrains or FiraCode)
+3. Restart terminal `source ~/.zshrc`
+   
 ## Screenshots
 ![image](https://github.com/muromeo1/env/assets/22664903/bd3fb2d3-2cbb-440e-8a18-1e1292829685)
 
