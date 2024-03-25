@@ -20,6 +20,6 @@ alias vim=nvim
 
 if type rg &> /dev/null; then
 	export IGNORED_FOLDERS='--glob "!*/{.git,node_modules,vendor,tmp,cache}/*"'
-  export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow $IGNORED_FOLDERS"
-  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+	export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow $IGNORED_FOLDERS"
+	export FZF_DEFAULT_OPTS='-m --height 50% --border'
 fi
