@@ -12,6 +12,7 @@ install_app() {
 }
 
 install_dependencies() {
+	echo '--------------------'
 	echo 'Installing Dependencies'
 	echo
 	install_app 'git'
@@ -21,6 +22,7 @@ install_dependencies() {
 }
 
 install_asdf() {
+	echo '--------------------'
 	echo 'Installing asdf'
 	echo
 	rm -rf ~/.asdf
@@ -30,6 +32,7 @@ install_asdf() {
 }
 
 install_nvim() {
+	echo '--------------------'
 	echo 'Installing neovim'
 	echo
 	install_app 'neovim'
@@ -40,12 +43,14 @@ install_nvim() {
 }
 
 install_zsh() {
+	echo '--------------------'
 	echo 'Installing ZSH'
 	echo
 	install_app 'zsh'
 }
 
 install_oh_my_zsh() {
+	echo '--------------------'
 	echo 'Installing Oh My Zsh'
 	echo
 	rm -rf ~/.oh-my-zsh
@@ -56,6 +61,7 @@ install_oh_my_zsh() {
 }
 
 install_nodejs() {
+	echo '--------------------'
 	echo 'Installing Nodejs'
 	echo
 	asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
@@ -63,7 +69,17 @@ install_nodejs() {
 	asdf global nodejs latest
 }
 
+install_ruby() {
+	echo '--------------------'
+	echo 'Installing Ruby'
+	echo
+	asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+	asdf install ruby latest
+	asdf global ruby latest
+}
+
 install_powerline_fonts() {
+	echo '--------------------'
 	echo 'Installing Powerline Fonts'
 	echo
 	git clone https://github.com/powerline/fonts.git --depth=1
@@ -75,19 +91,13 @@ install_powerline_fonts() {
 }
 
 main() {
-	echo '--------------------'
 	install_dependencies
-	echo '--------------------'
 	install_asdf
-	echo '--------------------'
 	install_nvim
-	echo '--------------------'
 	install_zsh
-	echo '--------------------'
 	install_oh_my_zsh
-	echo '--------------------'
 	install_nodejs
-	echo '--------------------'
+	install_ruby
 	install_powerline_fonts
 
 	zsh
