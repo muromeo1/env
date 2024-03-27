@@ -64,7 +64,7 @@ let g:blamer_enabled = 1
 
 command! -bang -nargs=* RG
 	\ call fzf#vim#grep2(
-	\ "rg --column --line-number --no-heading --color=always --smart-case " . $IGNORED_FOLDERS . " -- ",
+	\ "rg --column --line-number --no-heading --color=always --smart-case " . $FZF_IGNORED_FOLDERS . " -- ",
 	\ <q-args>,
 	\ fzf#vim#with_preview(),
 	\ <bang>0)
