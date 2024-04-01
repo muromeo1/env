@@ -9,6 +9,12 @@ It automatic installs my local environment and everything that needs to develop 
 4. Open neovim `nvim .`
 5. Run `:PlugInstall`
 6. Restart neovim
+7. Open again and run 
+```sh
+Copilot auth
+Copilot enable
+CocInstall coc-tsserver
+```
    
 ## Screenshots
 ![image](https://github.com/muromeo1/env/assets/22664903/bd3fb2d3-2cbb-440e-8a18-1e1292829685)
