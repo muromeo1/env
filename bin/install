@@ -15,10 +15,18 @@ install_dependencies() {
 	echo '--------------------'
 	echo 'Installing Dependencies'
 	echo
+
+	# Install brew if MacOS
+	if [ "$(uname)" == 'Darwin' ]; then
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	fi
+
 	install_app 'git'
 	install_app 'curl'
 	install_app 'ripgrep'
 	install_app 'gnupg'
+	install_app 'python3'
+	install_app 'libyaml'
 }
 
 install_asdf() {
@@ -78,16 +86,12 @@ install_ruby() {
 	asdf global ruby latest
 }
 
-install_powerline_fonts() {
+install_nerdfonts() {
 	echo '--------------------'
-	echo 'Installing Powerline Fonts'
+	echo 'Installing Nerd Fonts'
 	echo
-	git clone https://github.com/powerline/fonts.git --depth=1
-	cd fonts/
-	./install.sh
-	cd ../
-	rm -rf fonts/
-	echo 'Set the font in your terminal to a Powerline font (Fira code recommended) '
+	git clone git@github.com:ryanoasis/nerd-fonts.git --depth=1
+	nerd-fonts/install.sh FiraCode, JetBrainsMono
 }
 
 main() {
@@ -98,7 +102,7 @@ main() {
 	install_oh_my_zsh
 	install_nodejs
 	install_ruby
-	install_powerline_fonts
+	install_nerdfonts
 
 	zsh
 }

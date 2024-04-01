@@ -18,6 +18,8 @@ alias vim=nvim
 
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+export PYTHON3_LOCATION="$(which python3)"
+
 if type rg &> /dev/null; then
 	export IGNORED_FOLDERS='.git,node_modules,vendor,tmp,cache,package-lock.json'
 	export FZF_IGNORED_FOLDERS="--glob '!{$IGNORED_FOLDERS}'"

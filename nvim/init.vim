@@ -62,6 +62,8 @@ let g:NERDCompactSexyComs = 1
 
 let g:blamer_enabled = 1
 
+let g:python3_host_prog = $PYTHON3_LOCATION
+
 command! -bang -nargs=* RG
 	\ call fzf#vim#grep2(
 	\ "rg --column --line-number --no-heading --color=always --smart-case " . $FZF_IGNORED_FOLDERS . " -- ",
