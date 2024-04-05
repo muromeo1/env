@@ -7,6 +7,7 @@ set incsearch
 set encoding=UTF-8
 set colorcolumn=120
 set termguicolors
+set mouse=
 
 call plug#begin()
 
@@ -18,7 +19,7 @@ Plug 'tpope/vim-endwise'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
 Plug 'kqito/vim-easy-replace'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -32,6 +33,7 @@ Plug 'APZelos/blamer.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -53,8 +55,29 @@ let ruby_operators = 1
 let g:user_emmet_leader_key=','
 let g:onedark_termcolor = 256
 
-let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 0
+let g:copilot#enabled = 1
+
+" let g:prettier#autoformat = 1
+" let g:prettier#autoformat_require_pragma = 0
+
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️ '
+let g:ale_fix_on_save = 1
+let g:ale_ruby_rubocop_executable = 'bin/rubocop'
+let g:ale_sign_column_always = 1
+let g:ale_linters_explicit = 1
+let g:ale_fixers = {
+			\ 'javascript': ['prettier'],
+			\ 'javascriptreact': ['prettier'],
+			\ 'ruby': ['rubocop']
+			\}
+
+let g:ale_linters = {
+			\ 'javascript': ['eslint'],
+			\ 'javascriptreact': ['eslint'],
+			\ 'ruby': ['rubocop']
+			\}
+
 
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1

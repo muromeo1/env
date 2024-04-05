@@ -95,6 +95,16 @@ install_nerdfonts() {
 	nerd-fonts/install.sh FiraCode, JetBrainsMono
 }
 
+install_tmux() {
+	echo '--------------------'
+	echo 'Installing Tmux'
+	echo
+	install_app 'tmux'
+	rm -rf ~/.tmux/ ~/.tmux.conf ~/.tmux.conf.local
+	ln -s "$(pwd)/tmux/tmux.conf" ~/.tmux.conf
+	ln -s "$(pwd)/tmux/tmux.conf.local" ~/.tmux.conf.local
+}
+
 main() {
 	install_dependencies
 	install_asdf
@@ -104,6 +114,7 @@ main() {
 	install_nodejs
 	install_ruby
 	install_nerdfonts
+	install_tmux
 
 	zsh
 }

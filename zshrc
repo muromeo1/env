@@ -6,6 +6,7 @@ plugins=(
 	asdf
 	git
 	rails
+	bundler
 	zsh-autosuggestions
 	zsh-syntax-highlighting
 )
